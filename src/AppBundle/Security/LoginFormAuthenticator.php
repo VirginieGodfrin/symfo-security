@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Security;
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
@@ -36,6 +37,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $form->handleRequest($request);
 
 		$data = $form->getData();
+		//recupération de la session et du _username
+		$request->getSession()->set( 
+			Security::LAST_USERNAME,
+			$data['_username'] 
+		);
 
 		return $data;
 
