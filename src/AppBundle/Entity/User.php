@@ -79,6 +79,10 @@ class User implements UserInterface
 		$this->email = $email; 
 	}
 
+	public function getEmail() {
+		return $this->email; 
+	}
+
 	public function setRoles(array $roles) {
 		$this->roles = $roles; 
 	}
