@@ -7,9 +7,11 @@ use AppBundle\Form\GenusFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/admin")
+ * @Security("is_granted('ROLE_ADMIN')")
  */
 class GenusAdminController extends Controller
 {
@@ -18,6 +20,10 @@ class GenusAdminController extends Controller
      */
     public function indexAction()
     {
+        // if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) { 
+        //     throw $this->createAccessDeniedException('GET OUT!');
+        // }
+
         $genuses = $this->getDoctrine()
             ->getRepository('AppBundle:Genus')
             ->findAll();
